@@ -10,6 +10,6 @@ using CsvHelper;
 using System.IO;
 
 
-Fleur fleur = new Fleur("Rose", "Rouge", "Fleur de l'amour", 10);
+Fleur fleur = new Fleur();
 fleur.ImporterFleurs();
 Console.ReadKey();
