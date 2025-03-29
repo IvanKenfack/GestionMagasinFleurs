@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Globalization;
+using CsvHelper.Configuration.Attributes;
+using CsvHelper;
+using CsvHelper.Configuration;
+using GestionMagasinFleurs;
+
+namespace GestionMagasinFleurs
+{
+    internal class Fleur
+    {
+        [Name("Nom")]
+        public string Nom{ get; set;}
+
+        [Name ("Prix Unitaire(CAD)")]
+        public float PrixUnitaire { get; set; }
+
+        [Name("Couleur")]
+        public string Couleur { get; set; }
+
+        [Name("Caractéristiques")]
+        public string Caractéristiques { get; set; }
+
+        public int Quantité { get; set; }
+
+        public Fleur(string nom, string couleur,float prixUnitaire, string caractéristiques, int quantité)
+        {
+            this.Nom = nom;
+            this.Couleur = couleur;
+            this.PrixUnitaire = prixUnitaire;
+            this.Caractéristiques = caractéristiques;
+            this.Quantité = quantité;
+        }
+
+        public Fleur()
+        {
+        }
+
+        public void ImporterFleurs()
+        {
+
+            // Je recupère le chemin absolu du fichier CSV
+            string fichierCSV = Path.GetFullPath("fleurs_db.csv");
+            
+            Console.WriteLine(fichierCSV);
+
+            using (var lecture = new StreamReader(fichierCSV))
+            using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
+
+            {
+                csv.Context.RegisterClassMap<FleurMap>();
+                var records = csv.GetRecords<Fleur>().ToList();
+                int i = 0;
+                foreach (Fleur fleur in records)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Fleur {i+1}\n\nNom : {fleur.Nom}\nCouleur : {fleur.Couleur}\nCaratéristiques : {fleur.Caractéristiques}\nPrix Unitaire : {fleur.PrixUnitaire}");
+                    i++;
+                    Console.WriteLine();
+                }
+            }
+        }
+
+    }
+}
