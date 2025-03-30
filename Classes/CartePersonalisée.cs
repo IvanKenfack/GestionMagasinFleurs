@@ -8,28 +8,22 @@ namespace GestionMagasinFleurs
 {
     internal class CartePersonalisée
     {
-        public string Nom
+        public string Nom { get; set; }
+
+        public string Message { get; set; }
+
+        public void AfficherCarte()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            Console.WriteLine();
+            Console.WriteLine("Nom: " + Nom);
+            Console.WriteLine("Message: " + Message);
+            Console.WriteLine();
         }
 
-        public string Message
+        public void CustomiserCarte(string Nom, string message)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            this.Nom = Nom;
+            this.Message = message;
         }
     }
 }

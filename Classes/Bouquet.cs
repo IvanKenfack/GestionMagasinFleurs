@@ -8,44 +8,75 @@ namespace GestionMagasinFleurs
 {
     internal class Bouquet
     {
-            public List<Fleur> Fleurs
+        private List<Fleur> bouquet;
+        private CartePersonalisée carte; //{ get; set; }
+
+
+        public int PrixTotal {  get; set; }
+
+        public Bouquet()
+        {
+            bouquet = new List<Fleur>();
+            carte = new CartePersonalisée();
+        }
+
+        public Bouquet CreerBouquet(List<Fleur> choixFleurs)
+        {
+            Bouquet bouquet = new Bouquet();
+
+            foreach (Fleur fleur in choixFleurs)
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-                set
-                {
-                    throw new NotImplementedException();
-                }
+                bouquet.AjouterFleur(fleur);
             }
 
-            public int PrixTotal
+            string nom, message;
+
+            Console.WriteLine("Veuillez entrez le nom du béneficiare: ");
+            nom = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Veuillez entrez le message à insérer dans la carte: ");
+            message = Console.ReadLine();
+            Console.WriteLine();
+            CartePersonalisée carte = new CartePersonalisée();
+            carte.CustomiserCarte(nom, message);
+            Console.WriteLine("Bouquet crée avec succèss");
+            return bouquet;
+        }
+
+
+
+        public void EnregistrerModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AjouterFleur(Fleur fleur)
+        {
+            bouquet.Add(fleur);
+        }  
+            
+        public void AfficherBouquet()
+        {
+            foreach (Fleur fleur in bouquet)
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-                set
-                {
-                    throw new NotImplementedException();
-                }
+                fleur.AfficherFleur();
+            }
+                
+            carte.AfficherCarte();
+        }
+
+        public float CalculerPrixTotal()
+        {
+            float prixTotal = 0;
+
+            foreach (Fleur fleur in bouquet)
+            {
+                prixTotal += fleur.PrixUnitaire;
             }
 
-            public Bouquet()
-            {
-                throw new NotImplementedException();
-            }
+            prixTotal += 3;
+            return PrixTotal;
+        }
 
-            public void CalculerPrixTotal()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void EnregistrerModel()
-            {
-                throw new NotImplementedException();
-            }
-        
     }
 }

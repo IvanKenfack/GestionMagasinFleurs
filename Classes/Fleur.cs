@@ -45,8 +45,6 @@ namespace GestionMagasinFleurs
 
             // Je recupère le chemin absolu du fichier CSV
             string fichierCSV = Path.GetFullPath("fleurs_db.csv");
-            
-            Console.WriteLine(fichierCSV);
 
             using (var lecture = new StreamReader(fichierCSV))
             using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
@@ -65,5 +63,12 @@ namespace GestionMagasinFleurs
             }
         }
 
+        public void AfficherFleur()
+        {   
+            Console.WriteLine();
+            Console.WriteLine($"Nom : {this.Nom}\nCouleur : {this.Couleur}\nCaratéristiques : {this.Caractéristiques}\nPrix Unitaire : {this.PrixUnitaire}");
+            Console.WriteLine();
+        }
+          
     }
 }
