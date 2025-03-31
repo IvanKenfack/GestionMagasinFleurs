@@ -27,6 +27,10 @@ namespace GestionMagasinFleurs
 
         public int Quantité { get; set; }
 
+        private List<Fleur> fleurs = new List<Fleur>();
+
+        public List<Fleur> Fleurs { get => fleurs;}
+
         public Fleur(string nom, string couleur,float prixUnitaire, string caractéristiques, int quantité)
         {
             this.Nom = nom;
@@ -44,7 +48,7 @@ namespace GestionMagasinFleurs
         {
 
             // Je recupère le chemin absolu du fichier CSV
-            string fichierCSV = Path.GetFullPath("fleurs_db.csv");
+            string fichierCSV = "C:\\Users\\kenfa\\OneDrive\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\fleurs_db.csv";
 
             using (var lecture = new StreamReader(fichierCSV))
             using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
@@ -55,6 +59,7 @@ namespace GestionMagasinFleurs
                 int i = 0;
                 foreach (Fleur fleur in records)
                 {
+                    fleurs.Add(fleur);
                     Console.WriteLine();
                     Console.WriteLine($"Fleur {i+1}\n\nNom : {fleur.Nom}\nCouleur : {fleur.Couleur}\nCaratéristiques : {fleur.Caractéristiques}\nPrix Unitaire : {fleur.PrixUnitaire}");
                     i++;

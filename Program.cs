@@ -1,13 +1,20 @@
 ﻿using GestionMagasinFleurs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
-using CsvHelper.Configuration.Attributes;
-using CsvHelper;
-using System.IO;
+
+void Authentification()
+{
+    Console.WriteLine("Veuillez entrer votre nom d'utilisateur: ");
+    string nomUtilisateur = Console.ReadLine();
+    Console.WriteLine("Veuillez entrer votre mot de passe: ");
+    string motDePasse = Console.ReadLine();
+    if (nomUtilisateur == "admin" && motDePasse == "admin")
+    {
+        Console.WriteLine("Authentification réussie");
+    }
+    else
+    {
+        Console.WriteLine("Authentification échouée");
+    }
+}
 
 
 Fleur fleur = new Fleur();
