@@ -8,56 +8,28 @@ namespace GestionMagasinFleurs
 {
     internal class Commande
     {
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int ID { get; set; }
+        public string Date { get; set;}
+        public string Statut {  get; set;} 
 
-        public string Date
+        public Commande() { }
+        public Commande(int ID, string Date, string Statut)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            this.ID = ID;
+            this.Date = Date;
+            this.Statut = Statut;
         }
-
-        public string Statut
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Commande()
-        {
-            throw new NotImplementedException();
-        }
-
         public void ValiderCommande()
         {
-            throw new NotImplementedException();
+            Statut = "Validée";
+            Console.WriteLine($"Commande {ID} Validée.");
         }
-
         public void AnnulerCommande()
         {
-            throw new NotImplementedException();
+            Statut = "Annulée";
+            Console.WriteLine($"Commande {ID} annulée.");
         }
+       
 
     }
 }

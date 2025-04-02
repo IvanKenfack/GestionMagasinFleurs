@@ -8,47 +8,58 @@ namespace GestionMagasinFleurs
 {
     internal class Client : Utilisateur
     {
-        private int address;
-        private int numeroTel;
+        public int Adress {  get; set; }
+        public int NumeroTel {  get; set; }
+        public List<string> Preferences { get; set; }
 
-        public Client()
+        public Client() 
         {
-            throw new NotImplementedException();
+            Preferences = new List<string>();
         }
 
-        public void EffectuerPaiement()
+        public Client(int id, string nom, string email, int motDepasse, int adress, int numeroTel) : base(id, nom, email, motDepasse)
         {
-            throw new NotImplementedException();
+            Adress = adress;
+            NumeroTel = numeroTel;
+            Preferences = new List<string>();
+        }
+
+       
+        public void IndiquerPreference(string preference)
+        {
+           Preferences.Add(preference);
+            Console.WriteLine($"{Nom} a ajouté une préférence : {preference}");
+        }
+
+        public void SelectionnerFleur(string fleur)
+        {
+            Console.WriteLine($"{Nom} a sélectionné la fleur : {fleur}");
+        }
+
+        public void SelectionnerBouquet(string bouquet)
+        {
+            Console.WriteLine($"{Nom} a sélectionné le bouquet : {bouquet}");
         }
 
         public void PasserCommande()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a passé une commande.");
         }
 
         public void ChoisirMoyenPaiement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a choisi un moyen de paiyement.");
         }
 
-        public void FaireChoix()
+        public void EffectuerPaiement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a Effectué un paiyement.");
         }
 
-        public void SelectionnerFleur()
-        {
-            throw new NotImplementedException();
-        }
+       
+        
 
-        public void SelectionnerBouquet()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void IndiquerPreference()
-        {
-            throw new NotImplementedException();
-        }
+       
+ 
     }
 }
