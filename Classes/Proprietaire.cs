@@ -8,9 +8,15 @@ namespace GestionMagasinFleurs
 {
     internal class Proprietaire : Utilisateur
     {
-        public Proprietaire()
+
+        public Proprietaire() { }
+
+        public Proprietaire(int id, string nom, string email, int motDepasse) : base(id, nom, email, motDepasse)
         {
-            throw new NotImplementedException();
+        }
+        public void GérerBoutique()
+        {
+            Console.WriteLine($"{Nom} gère la boutique.");
         }
     }
 }

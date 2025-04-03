@@ -8,58 +8,27 @@ namespace GestionMagasinFleurs
 {
     internal class Utilisateur
     {
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public string Email { get; set; }
+        public int MotDepasse { get; set; }
 
-        public string Nom
+        public Utilisateur() { }
+        public Utilisateur(int id, string nom, string email, int motDepasse)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            Id = id;
+            Nom = nom;
+            Email = email;
+            MotDepasse = motDepasse;
         }
-
-        public string Email
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int MotDePasse
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public void Authentification()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} est athentifié.");
         }
-
         public void Deconnexion()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} s'est déconnecté.");
         }
+
     }
 }
