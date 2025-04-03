@@ -8,28 +8,54 @@ namespace GestionMagasinFleurs
 {
     internal class Commande
     {
-        public int ID
+        public int ID { get; set; }
+                
+        public EtatCommande Etat { get; set; }
+
+        public Client Client { get; set; }
+
+        public DateTime DateCommande { get; set; }
+
+        public Vendeur Vendeur { get; set; }
+
+        public float Montant { get; set; }
+
+        public List<Produit> produits = new List<Produit>();
+
+        public Commande(int ID, EtatCommande etat, Client client, DateTime dateCommande, Vendeur vendeur)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            this.ID = ID;
+            this.Etat = etat;
+            this.Client = client;
+            this.DateCommande = dateCommande;
+            this.Vendeur = vendeur;
+            this.Montant = this.CalculerMontant();
         }
 
-        public string Date
+        public void ValiderCommande()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            this.Etat = EtatCommande.Validée              ;
+        }
+
+        public void AnnulerCommande()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AfficherCommande()
+        {
+            Console.WriteLine();
+            Console.WriteLine("ID: " + ID);
+            Console.WriteLine("Etat: " + Etat);
+            Console.WriteLine("Client: " + Client);
+            Console.WriteLine("Date de commande: " + DateCommande);
+            Console.WriteLine("Vendeur: " + Vendeur);
+            Console.WriteLine();
+        }
+
+        public void AjouterProduit(Produit produit)
+        {
+            produits.Add(produit);
         }
 
         public string Statut
