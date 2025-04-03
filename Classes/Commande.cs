@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GestionMagasinFleurs.Classes;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,50 +10,33 @@ namespace GestionMagasinFleurs
 {
     internal class Commande
     {
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int ID { get; set; }
+                
+        public EtatCommande Etat { get; set; }
 
-        public string Date
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public Client Client { get; set; }
 
-        public string Statut
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public DateTime DateCommande { get; set; }
 
-        public Commande()
+        public Vendeur Vendeur { get; set; }
+
+        public float Montant { get; set; }
+
+        public List<Produit> produits = new List<Produit>();
+
+        public Commande(int ID, EtatCommande etat, Client client, DateTime dateCommande, Vendeur vendeur)
         {
-            throw new NotImplementedException();
+            this.ID = ID;
+            this.Etat = etat;
+            this.Client = client;
+            this.DateCommande = dateCommande;
+            this.Vendeur = vendeur;
+            this.Montant = this.CalculerMontant();
         }
 
         public void ValiderCommande()
         {
-            throw new NotImplementedException();
+            this.Etat = EtatCommande.Validée              ;
         }
 
         public void AnnulerCommande()
@@ -59,5 +44,39 @@ namespace GestionMagasinFleurs
             throw new NotImplementedException();
         }
 
+        public void AfficherCommande()
+        {
+            Console.WriteLine();
+            Console.WriteLine("ID: " + ID);
+            Console.WriteLine("Etat: " + Etat);
+            Console.WriteLine("Client: " + Client);
+            Console.WriteLine("Date de commande: " + DateCommande);
+            Console.WriteLine("Vendeur: " + Vendeur);
+            Console.WriteLine();
+        }
+
+        public void AjouterProduit(Produit produit)
+        {
+            produits.Add(produit);
+        }
+
+        public float CalculerMontant()
+        {
+            float montant = 0;
+            foreach (Produit produit in produits)
+            {
+                if (produit is Fleur)
+                {
+                    Fleur fleur = (Fleur)produit;
+                    montant += fleur.PrixUnitaire * fleur.Quantité;
+                }
+                else if (produit is Bouquet)
+                {
+                    Bouquet bouquet = (Bouquet)produit;
+                    montant += bouquet.PrixTotal;
+                }
+            }
+            return montant;
+        }
     }
 }

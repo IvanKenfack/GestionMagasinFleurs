@@ -7,11 +7,11 @@ using System.Globalization;
 using CsvHelper.Configuration.Attributes;
 using CsvHelper;
 using CsvHelper.Configuration;
-using GestionMagasinFleurs;
+using GestionMagasinFleurs.Classes;
 
 namespace GestionMagasinFleurs
 {
-    internal class Fleur
+    internal class Fleur : Produit
     {
         [Name("Nom")]
         public string Nom{ get; set;}
