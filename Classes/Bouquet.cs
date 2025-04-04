@@ -59,14 +59,14 @@ namespace GestionMagasinFleurs
             bouquet.Add(fleur);
         }  
             
-        public void AfficherBouquet()
+        public override void Afficher()
         {
+            Console.WriteLine("-----------------BOUQUET--------------------------");
+            carte.AfficherCarte();
             foreach (Fleur fleur in bouquet)
             {
-                fleur.AfficherFleur();
-            }
-                
-            carte.AfficherCarte();
+                fleur.Afficher();
+            }   
         }
 
         public float CalculerPrixTotal()
@@ -88,12 +88,12 @@ namespace GestionMagasinFleurs
             foreach (Bouquet bouquet in modeles)
             {
                 Console.WriteLine($"Modèle {i + 1}");
-                bouquet.AfficherBouquet();
+                bouquet.Afficher();
                 i++;
             }
         }
 
-        public void ExporterModeles(Bouquet bouquet)
+        public void StockerModeles(Bouquet bouquet)
         {
             string fichierJSON = "modeles_Bouquets.json";
             string modelesBouquets = File.ReadAllText(fichierJSON);

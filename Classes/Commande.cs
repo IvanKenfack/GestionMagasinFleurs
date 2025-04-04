@@ -13,7 +13,7 @@ namespace GestionMagasinFleurs
         public int ID { get; set; }
                 
         public EtatCommande Etat { get; set; }
-<<<<<<< HEAD
+
 
         public Client Client { get; set; }
 
@@ -23,55 +23,7 @@ namespace GestionMagasinFleurs
 
         public float Montant { get; set; }
 
-        public List<Produit> produits = new List<Produit>();
-
-        public Commande(int ID, EtatCommande etat, Client client, DateTime dateCommande, Vendeur vendeur)
-        {
-            this.ID = ID;
-            this.Etat = etat;
-            this.Client = client;
-            this.DateCommande = dateCommande;
-            this.Vendeur = vendeur;
-            this.Montant = this.CalculerMontant();
-        }
-
-        public void ValiderCommande()
-        {
-            this.Etat = EtatCommande.Validée              ;
-        }
-
-        public void AnnulerCommande()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AfficherCommande()
-        {
-            Console.WriteLine();
-            Console.WriteLine("ID: " + ID);
-            Console.WriteLine("Etat: " + Etat);
-            Console.WriteLine("Client: " + Client);
-            Console.WriteLine("Date de commande: " + DateCommande);
-            Console.WriteLine("Vendeur: " + Vendeur);
-            Console.WriteLine();
-        }
-
-        public void AjouterProduit(Produit produit)
-        {
-            produits.Add(produit);
-        }
-=======
-
-        public Client Client { get; set; }
->>>>>>> master
-
-        public DateTime DateCommande { get; set; }
-
-        public Vendeur Vendeur { get; set; }
-
-        public float Montant { get; set; }
-
-        public List<Produit> produits = new List<Produit>();
+        public List<Article> articles = new List<Article>();
 
         public Commande(int ID, EtatCommande etat, Client client, DateTime dateCommande, Vendeur vendeur)
         {
@@ -104,24 +56,24 @@ namespace GestionMagasinFleurs
             Console.WriteLine();
         }
 
-        public void AjouterProduit(Produit produit)
+        public void AjouterProduit(Article article)
         {
-            produits.Add(produit);
+            articles.Add(article);
         }
 
         public float CalculerMontant()
         {
             float montant = 0;
-            foreach (Produit produit in produits)
+            foreach (Article article in articles)
             {
-                if (produit is Fleur)
+                if (article.Produit is Fleur)
                 {
-                    Fleur fleur = (Fleur)produit;
+                    Fleur fleur = (Fleur)article.Produit;
                     montant += fleur.PrixUnitaire * fleur.Quantité;
                 }
-                else if (produit is Bouquet)
+                else if (article.Produit is Bouquet)
                 {
-                    Bouquet bouquet = (Bouquet)produit;
+                    Bouquet bouquet = (Bouquet)article.Produit;
                     montant += bouquet.PrixTotal;
                 }
             }

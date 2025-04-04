@@ -9,12 +9,11 @@ namespace GestionMagasinFleurs
 {
     internal class Client : Utilisateur
     {
-        private 
 
-        public Client(int id, string nom, string email, int motDepasse, string role) 
-            : base(id, nom, email, motDepasse, role)
+        public Client(int id, string nom, string email, int motDepasse) 
+            : base(id, nom, email, motDepasse)
         {
-
+            this.Role = RoleUtilisateur.client;
         }
 
         public void SelectionnerFleur(string fleur)
@@ -27,14 +26,14 @@ namespace GestionMagasinFleurs
             Console.WriteLine($"{Nom} a sélectionné le bouquet : {bouquet}");
         }
 
-        public void PasserCommande()
+        public void PasserCommande(Commande commande,Magasin magasin)
         {
-            Console.WriteLine($"{Nom} a passé une commande.");
+            ;
         }
 
-        public void ChoisirMoyenPaiement()
+        public void ChoisirMoyenPaiement(TypePaiement paiement, Commande commande)
         {
-            Console.WriteLine($"{Nom} a choisi un moyen de paiement.");
+            commande.Etat = paiement;
         }
 
         public void EffectuerPaiement()
@@ -42,10 +41,11 @@ namespace GestionMagasinFleurs
             Console.WriteLine($"{Nom} a Effectué un paiement.");
         }
 
-       
-        
 
-       
- 
+
+
+
+
+
     }
 }

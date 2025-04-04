@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    internal class Produit
+    internal abstract class Produit
     {
-
+        public abstract void Afficher(); 
     }
 }

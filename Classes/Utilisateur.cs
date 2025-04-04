@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionMagasinFleurs.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,14 @@ namespace GestionMagasinFleurs
         public string Email { get; set; }
         public int MotDepasse { get; set; }
 
-        public  string Role { get; set; }
-        public Utilisateur(int id, string nom, string email, int motDepasse, string role)
+        public  RoleUtilisateur Role { get; set;}
+        public Utilisateur(int id, string nom, string email, int motDepasse)
         {
             Id = id;
             Nom = nom;
             Email = email;
             MotDepasse = motDepasse;
-            Role = role;
         }
-        public abstract void AfficherRole();
 
     }
 }

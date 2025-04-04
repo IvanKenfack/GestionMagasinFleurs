@@ -70,10 +70,10 @@ namespace GestionMagasinFleurs
             }
         }
 
-        public void AfficherFleur()
+        public override void Afficher()
         {   
             Console.WriteLine();
-            Console.WriteLine($"Nom : {this.Nom}\nCouleur : {this.Couleur}\nCaratéristiques : {this.Caractéristiques}\nPrix Unitaire : {this.PrixUnitaire}");
+            Console.WriteLine($"Nom : {this.Nom}\nCouleur : {this.Couleur}\nCaratéristiques : {this.Caractéristiques}\nPrix Unitaire : {this.PrixUnitaire} CAD");
             Console.WriteLine();
         }
           
