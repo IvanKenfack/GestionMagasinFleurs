@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    internal class Produit
+    public enum RoleUtilisateur
     {
-
+        vendeur,
+        fournisseur,
+        administrateur,
+        client
     }
 }

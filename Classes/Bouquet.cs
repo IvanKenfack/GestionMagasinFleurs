@@ -93,18 +93,16 @@ namespace GestionMagasinFleurs
             }
         }
 
-        public void ExporterModeles(List<Bouquet> modeles)
+        public void ExporterModeles(Bouquet bouquet)
         {
             string fichierJSON = "modeles_Bouquets.json";
-            using (StreamWriter fichier = File.AppendText(fichierJSON))
-            {
-                foreach (Bouquet modele in modeles)
-                {
-                    string modeleSerialise = JsonConvert.SerializeObject(modele);
-                    fichier.WriteLine(modeleSerialise);
-                }
-                    
-            }
+            string modelesBouquets = File.ReadAllText(fichierJSON);
+
+            List<Bouquet> modelesBouquetsList = JsonConvert.DeserializeObject<List<Bouquet>>(modelesBouquets);
+
+            modelesBouquetsList.Add(bouquet);
+            string json = JsonConvert.SerializeObject(modelesBouquetsList, Formatting.Indented);
+            File.WriteAllText(fichierJSON, json);   
         }
     }
 }

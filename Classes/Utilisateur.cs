@@ -6,29 +6,23 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs
 {
-    internal class Utilisateur
+    internal abstract class Utilisateur
     {
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Email { get; set; }
         public int MotDepasse { get; set; }
 
-        public Utilisateur() { }
-        public Utilisateur(int id, string nom, string email, int motDepasse)
+        public  string Role { get; set; }
+        public Utilisateur(int id, string nom, string email, int motDepasse, string role)
         {
             Id = id;
             Nom = nom;
             Email = email;
             MotDepasse = motDepasse;
+            Role = role;
         }
-        public void Authentification()
-        {
-            Console.WriteLine($"{Nom} est athentifié.");
-        }
-        public void Deconnexion()
-        {
-            Console.WriteLine($"{Nom} s'est déconnecté.");
-        }
+        public abstract void AfficherRole();
 
     }
 }

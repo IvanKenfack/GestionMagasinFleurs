@@ -11,13 +11,19 @@ namespace GestionMagasinFleurs
         public string Contact { get; set; }
 
         public Fournisseur() { }
-        public Fournisseur (int id, string nom, string email, int motDepasse, string contact) : base(id, nom, email, motDepasse)
+        public Fournisseur(int id, string nom, string email, int motDepasse, string role, string contact)
+            : base(id, nom, email, motDepasse, role)
         {
             Contact = contact;
         }
         public void ApprovisionnerFleurs()
         {
             Console.WriteLine($"{Nom} approvisionne les fleurs.");
+        }
+
+        public override void AfficherRole()
+        {
+            Console.WriteLine($"{Nom} est un {Role}");
         }
     }
 }

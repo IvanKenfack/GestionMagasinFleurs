@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionMagasinFleurs.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,45 +9,21 @@ namespace GestionMagasinFleurs
 {
     internal class Facture
     {
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int ID { get; set;}
 
-        public int PrixTotal
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int PrixTotal { get; set; }
 
-        public TypePaiement ModePaiement
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public TypePaiement ModePaiement { get; set; }
 
-        public Facture()
+        public DateTime DateFacture { get; set; }
+
+        Produit produit { get; set; }
+
+        
+
+        public Facture(int id, )
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

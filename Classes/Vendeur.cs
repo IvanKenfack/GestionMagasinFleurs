@@ -19,5 +19,10 @@ namespace GestionMagasinFleurs
         {
             Console.WriteLine($"{Nom} suit une commande.");
         }
+
+        public override void AfficherRole()
+        {
+            Console.WriteLine($"{Nom} est un vendeur.");
+        }
     }
 }

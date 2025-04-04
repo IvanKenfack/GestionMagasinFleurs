@@ -40,6 +40,8 @@ namespace GestionMagasinFleurs
             this.Quantité = quantité;
         }
 
+
+        /// Constructeur par défaut necessaire pour la lecture du CSV
         public Fleur()
         {
         }

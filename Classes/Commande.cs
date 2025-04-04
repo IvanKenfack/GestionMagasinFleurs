@@ -41,7 +41,7 @@ namespace GestionMagasinFleurs
 
         public void AnnulerCommande()
         {
-            throw new NotImplementedException();
+            this.Etat = EtatCommande.Annulée;
         }
 
         public void AfficherCommande()

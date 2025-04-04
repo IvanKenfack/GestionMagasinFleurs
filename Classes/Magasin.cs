@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    internal class Produit
+    internal class Magasin
     {
 
     }
