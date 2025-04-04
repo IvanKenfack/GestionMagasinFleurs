@@ -8,16 +8,22 @@ namespace GestionMagasinFleurs
 {
     internal class Fournisseur : Utilisateur
     {
-        string contact;
+        public string Contact { get; set; }
 
-        public Fournisseur()
+        public Fournisseur() { }
+        public Fournisseur(int id, string nom, string email, int motDepasse, string role, string contact)
+            : base(id, nom, email, motDepasse, role)
         {
-            throw new NotImplementedException();
+            Contact = contact;
+        }
+        public void ApprovisionnerFleurs()
+        {
+            Console.WriteLine($"{Nom} approvisionne les fleurs.");
         }
 
-        public void ApprovisionnerFleur()
+        public override void AfficherRole()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} est un {Role}");
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionMagasinFleurs
+namespace GestionMagasinFleurs.Classes
 {
     internal class FleurMap : ClassMap<Fleur>
     {

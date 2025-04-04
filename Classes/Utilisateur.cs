@@ -6,60 +6,23 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs
 {
-    internal class Utilisateur
+    internal abstract class Utilisateur
     {
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public string Email { get; set; }
+        public int MotDepasse { get; set; }
 
-        public string Nom
+        public  string Role { get; set; }
+        public Utilisateur(int id, string nom, string email, int motDepasse, string role)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            Id = id;
+            Nom = nom;
+            Email = email;
+            MotDepasse = motDepasse;
+            Role = role;
         }
+        public abstract void AfficherRole();
 
-        public string Email
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int MotDePasse
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Authentification()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deconnexion()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

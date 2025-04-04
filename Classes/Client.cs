@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionMagasinFleurs.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,47 +9,43 @@ namespace GestionMagasinFleurs
 {
     internal class Client : Utilisateur
     {
-        private int address;
-        private int numeroTel;
+        private 
 
-        public Client()
+        public Client(int id, string nom, string email, int motDepasse, string role) 
+            : base(id, nom, email, motDepasse, role)
         {
-            throw new NotImplementedException();
+
         }
 
-        public void EffectuerPaiement()
+        public void SelectionnerFleur(string fleur)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void SelectionnerBouquet(string bouquet)
+        {
+            Console.WriteLine($"{Nom} a sélectionné le bouquet : {bouquet}");
         }
 
         public void PasserCommande()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a passé une commande.");
         }
 
         public void ChoisirMoyenPaiement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a choisi un moyen de paiement.");
         }
 
-        public void FaireChoix()
+        public void EffectuerPaiement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} a Effectué un paiement.");
         }
 
-        public void SelectionnerFleur()
-        {
-            throw new NotImplementedException();
-        }
+       
+        
 
-        public void SelectionnerBouquet()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void IndiquerPreference()
-        {
-            throw new NotImplementedException();
-        }
+       
+ 
     }
 }

@@ -8,31 +8,21 @@ namespace GestionMagasinFleurs
 {
     internal class Vendeur : Utilisateur
     {
-        public int Salaire
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+       public int Salaire {  get; set; }
 
-        public Vendeur()
+        public Vendeur() { }
+        public Vendeur(int id, string nom, string email, int motDepasse,int salaire) : base(id, nom, email, motDepasse)
         {
-            throw new NotImplementedException();
+            salaire = salaire;
         }
-
         public void SuivreCommande()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} suit une commande.");
         }
 
-        public void NewMethod()
+        public override void AfficherRole()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Nom} est un vendeur.");
         }
     }
 }

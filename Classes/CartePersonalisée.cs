@@ -20,7 +20,7 @@ namespace GestionMagasinFleurs
             Console.WriteLine();
         }
 
-        public void CustomiserCarte(string Nom, string message)
+        public CartePersonalisée(string Nom, string message)
         {
             this.Nom = Nom;
             this.Message = message;
