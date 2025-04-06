@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    public enum RoleUtilisateur
+    internal class Carte
     {
-        vendeur,
-        fournisseur,
-        proprietaire,
-        client
     }
 }

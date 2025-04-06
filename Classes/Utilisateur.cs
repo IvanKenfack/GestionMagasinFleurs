@@ -23,5 +23,21 @@ namespace GestionMagasinFleurs
             MotDepasse = motDepasse;
         }
 
+        public static Utilisateur Authentifier(string email, int motDePasse, List<Utilisateur> utilisateurs)
+        {
+            foreach (var utilisateur in utilisateurs)
+            {
+                if (utilisateur.Email == email && utilisateur.MotDepasse == motDePasse)
+                {
+                    Console.WriteLine($"Bienvenue {utilisateur.Nom} !");
+                    return utilisateur;
+                }
+            }
+
+            Console.WriteLine("Email ou mot de passe incorrect.");
+            return null;
+        }
+
+
     }
 }

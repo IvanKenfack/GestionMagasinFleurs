@@ -21,7 +21,7 @@ namespace GestionMagasinFleurs
 
         
 
-        public Facture(int id, )
+        public Facture(int id )
         {
             
         }

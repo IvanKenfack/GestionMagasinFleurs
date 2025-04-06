@@ -17,24 +17,27 @@ namespace GestionMagasinFleurs
 
         public Client Client { get; set; }
 
-        public DateTime DateCommande { get; set; }
-
         public Vendeur Vendeur { get; set; }
 
         public float Montant { get; set; }
 
-        public List<Article> articles = new List<Article>();
+        public List<Article> articles;
 
-        public Commande(int ID, EtatCommande etat, Client client, DateTime dateCommande, Vendeur vendeur)
+        public TypePaiement ModePaiement { get; set; }
+
+        public Commande(int ID,Client client, Vendeur vendeur)
         {
             this.ID = ID;
-            this.Etat = etat;
+            this.Etat = EtatCommande.EnCours;
             this.Client = client;
-            this.DateCommande = dateCommande;
             this.Vendeur = vendeur;
+            this.articles = new List<Article>();
             this.Montant = this.CalculerMontant();
+            this.ModePaiement = client.ChoisirMoyenPaiement();
         }
 
+
+        public Commande() { }
         public void ValiderCommande()
         {
             this.Etat = EtatCommande.Validée              ;
@@ -50,13 +53,12 @@ namespace GestionMagasinFleurs
             Console.WriteLine();
             Console.WriteLine("ID: " + ID);
             Console.WriteLine("Etat: " + Etat);
-            Console.WriteLine("Client: " + Client);
-            Console.WriteLine("Date de commande: " + DateCommande);
-            Console.WriteLine("Vendeur: " + Vendeur);
+            Console.WriteLine("Client: " + Client.Nom);
+            Console.WriteLine("Vendeur: " + Vendeur.Nom);
             Console.WriteLine();
         }
 
-        public void AjouterProduit(Article article)
+        public void AjouterArticle(Article article)
         {
             articles.Add(article);
         }
@@ -78,6 +80,24 @@ namespace GestionMagasinFleurs
                 }
             }
             return montant;
+        }
+
+        public void GenererFacture()
+        {
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("Facture de la commande:");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine($"ID: {ID}");
+            Console.WriteLine($"Etat: {Etat}");
+            Console.WriteLine($"Client: {Client.Nom}");
+            //Console.WriteLine($"Date de commande: {DateCommande}");
+            Console.WriteLine($"Vendeur: {Vendeur.Nom}");
+            Console.WriteLine($"Montant total: {Montant}");
+            Console.WriteLine("--------------------------------------------------");
+            foreach (Article article in articles)
+            {
+                article.AfficherArticle();
+            }
         }
     }
 }

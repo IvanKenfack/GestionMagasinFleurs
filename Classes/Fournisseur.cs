@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GestionMagasinFleurs.Classes; 
 
 namespace GestionMagasinFleurs
 {
@@ -10,20 +11,21 @@ namespace GestionMagasinFleurs
     {
         public string Contact { get; set; }
 
-        public Fournisseur() { }
-        public Fournisseur(int id, string nom, string email, int motDepasse, string role, string contact)
-            : base(id, nom, email, motDepasse, role)
+        //public Fournisseur() { }
+        public Fournisseur(int id, string nom, string email, int motDepasse,string contact)
+            : base(id, nom, email, motDepasse)
         {
             Contact = contact;
+            this.Role = RoleUtilisateur.fournisseur;
         }
-        public void ApprovisionnerFleurs()
+        public void ApprovisionnerFleurs(MagasinFleur magasin, List<Fleur> nouveauStock)
         {
-            Console.WriteLine($"{Nom} approvisionne les fleurs.");
+            foreach (Fleur fleur in nouveauStock)
+            {
+                magasin.stockFleur.Add(fleur);
+            }
         }
 
-        public override void AfficherRole()
-        {
-            Console.WriteLine($"{Nom} est un {Role}");
-        }
+
     }
 }

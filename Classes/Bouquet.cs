@@ -12,13 +12,14 @@ namespace GestionMagasinFleurs
     {
         private List<Fleur> bouquet;
         private CartePersonalisée carte; //{ get; set; }
-        private List<Bouquet> modeles = new List<Bouquet>();
+        //private List<Bouquet> modeles = new List<Bouquet>();
 
         public int PrixTotal {  get; set; }
 
         public Bouquet(List<Fleur> choixFleurs,string nom, string message)
         {
-            bouquet = new List<Fleur>();
+            choixFleurs = new List<Fleur>();
+            this.bouquet = new List<Fleur>();
             carte = new CartePersonalisée(nom,message);
             foreach (Fleur fleur in choixFleurs)
             {
@@ -27,32 +28,10 @@ namespace GestionMagasinFleurs
 
         }
 
-        //public Bouquet CreerBouquet(List<Fleur> choixFleurs)
+        //public void EnregistrerModel(Bouquet bouquet)
         //{
-        //    //Bouquet bouquet = new Bouquet();
-
-            
-
-        //    string nom, message;
-
-        //    Console.WriteLine("Veuillez entrez le nom du béneficiare: ");
-        //    nom = Console.ReadLine();
-        //    Console.WriteLine();
-        //    Console.WriteLine("Veuillez entrez le message à insérer dans la carte: ");
-        //    message = Console.ReadLine();
-        //    Console.WriteLine();
-        //    CartePersonalisée carte = new CartePersonalisée();
-        //    carte.CustomiserCarte(nom, message);
-        //    Console.WriteLine("Bouquet crée avec succèss");
-        //    return bouquet;
+        //    modeles.Add(bouquet);
         //}
-
-
-
-        public void EnregistrerModel(Bouquet bouquet)
-        {
-            modeles.Add(bouquet);
-        }
 
         public void AjouterFleur(Fleur fleur)
         {
@@ -73,7 +52,7 @@ namespace GestionMagasinFleurs
         {
             float prixTotal = 0;
 
-            foreach (Fleur fleur in bouquet)
+            foreach (Fleur fleur in this.bouquet)
             {
                 prixTotal += fleur.PrixUnitaire;
             }
@@ -82,27 +61,30 @@ namespace GestionMagasinFleurs
             return PrixTotal;
         }
 
-        public void AfficherModeles()
+        //public void AfficherModeles()
+        //{
+        //    int i = 0;
+        //    foreach (Bouquet bouquet in modeles)
+        //    {
+        //       Console.WriteLine($"Modèle {i + 1}");
+        //       bouquet.Afficher();
+        //        i++;
+        //    }
+        //}
+
+        public void StockerModeles(Bouquet modele)
         {
-            int i = 0;
-            foreach (Bouquet bouquet in modeles)
-            {
-                Console.WriteLine($"Modèle {i + 1}");
-                bouquet.Afficher();
-                i++;
-            }
-        }
+           string fichierJSON = "modeles_Bouquets.json";
+           string modelesBouquets = File.ReadAllText(fichierJSON);
 
-        public void StockerModeles(Bouquet bouquet)
-        {
-            string fichierJSON = "modeles_Bouquets.json";
-            string modelesBouquets = File.ReadAllText(fichierJSON);
+           List<Bouquet> modelesBouquetsList = JsonConvert.DeserializeObject<List<Bouquet>>(modelesBouquets);
 
-            List<Bouquet> modelesBouquetsList = JsonConvert.DeserializeObject<List<Bouquet>>(modelesBouquets);
+            modelesBouquetsList.Add(modele);
 
-            modelesBouquetsList.Add(bouquet);
+             //modelesBouquetsList.Add(bouquet);
             string json = JsonConvert.SerializeObject(modelesBouquetsList, Formatting.Indented);
             File.WriteAllText(fichierJSON, json);   
         }
+
     }
 }

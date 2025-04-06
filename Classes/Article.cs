@@ -22,6 +22,10 @@ namespace GestionMagasinFleurs.Classes
             this.sousTotal = CalculerSousTotal();
         }
 
+        public Article()
+        {
+        }
+
         public double CalculerSousTotal()
         {
             if (this.Produit is Fleur)

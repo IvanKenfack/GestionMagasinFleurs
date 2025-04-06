@@ -13,6 +13,7 @@ namespace GestionMagasinFleurs
 {
     internal class Fleur : Produit
     {
+        /// Attributs de la classe Fleur pour le mappage CSV
         [Name("Nom")]
         public string Nom{ get; set;}
 
@@ -27,9 +28,7 @@ namespace GestionMagasinFleurs
 
         public int Quantité { get; set; }
 
-        private List<Fleur> fleurs = new List<Fleur>();
-
-        public List<Fleur> Fleurs { get => fleurs;}
+        public List<Fleur> Fleurs { get; set;}
 
         public Fleur(string nom, string couleur,float prixUnitaire, string caractéristiques, int quantité)
         {
@@ -44,13 +43,14 @@ namespace GestionMagasinFleurs
         /// Constructeur par défaut necessaire pour la lecture du CSV
         public Fleur()
         {
+            this.Fleurs = new List<Fleur>();
         }
 
         public void ImporterFleurs()
         {
 
             // Je recupère le chemin absolu du fichier CSV
-            string fichierCSV = "C:\\Users\\kenfa\\OneDrive\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\fleurs_db.csv";
+            string fichierCSV = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\fleurs_db.csv";
 
             using (var lecture = new StreamReader(fichierCSV))
             using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
@@ -61,11 +61,8 @@ namespace GestionMagasinFleurs
                 int i = 0;
                 foreach (Fleur fleur in records)
                 {
-                    fleurs.Add(fleur);
-                    Console.WriteLine();
-                    Console.WriteLine($"Fleur {i+1}\n\nNom : {fleur.Nom}\nCouleur : {fleur.Couleur}\nCaratéristiques : {fleur.Caractéristiques}\nPrix Unitaire : {fleur.PrixUnitaire}");
-                    i++;
-                    Console.WriteLine();
+                    //Ajouter la fleur à la liste
+                    Fleurs.Add(fleur);
                 }
             }
         }
