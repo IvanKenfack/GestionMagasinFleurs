@@ -19,14 +19,27 @@ namespace GestionMagasinFleurs.Classes
         {
             JObject obj = JObject.Load(reader);
 
-            // Détecte le type concret basé sur les propriétés
-            if (obj["Fleurs"] != null)  // Si c'est un Bouquet
+            // Si l'objet a une propriété "bouquet", c'est un Bouquet
+            if (obj["bouquet"] != null)
             {
-                return obj.ToObject<Bouquet>(serializer);
+                var bouquet = new Bouquet
+                {
+                    bouquet = obj["bouquet"].ToObject<List<Fleur>>(serializer),
+                    carte = obj["carte"]?.ToObject<CartePersonalisée>(serializer)
+                };
+                return bouquet;
             }
-            else if (obj["PrixUnitaire"] != null)  // Si c'est une Fleur
+            // Sinon, c'est une Fleur simple
+            else if (obj["Nom"] != null && obj["PrixUnitaire"] != null)
             {
-                return obj.ToObject<Fleur>(serializer);
+                return new Fleur
+                {
+                    Nom = obj["Nom"].ToString(),
+                    PrixUnitaire = obj["PrixUnitaire"].Value<float>(),
+                    Couleur = obj["Couleur"].ToString(),
+                    Caractéristiques = obj["Caractéristiques"].ToString(),
+                    Quantité = obj["Quantité"]?.Value<int>() ?? 0
+                };
             }
 
             throw new JsonSerializationException("Type de produit non reconnu");

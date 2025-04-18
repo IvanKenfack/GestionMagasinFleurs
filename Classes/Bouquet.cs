@@ -11,7 +11,10 @@ namespace GestionMagasinFleurs
 {
     internal class Bouquet : IProduit
     {
-        public List<Fleur> bouquet;
+        [JsonProperty("bouquet")]
+        public List<Fleur> bouquet { get; set; }
+
+        [JsonProperty("carte")]
         public CartePersonalisée carte; 
 
         public float PrixUnitaire { 
@@ -60,8 +63,8 @@ namespace GestionMagasinFleurs
         {
             Console.WriteLine();
             Console.WriteLine("-----------------BOUQUET--------------------------");
-            carte.AfficherCarte();
-            foreach (Fleur fleur in bouquet)
+            this.carte.AfficherCarte();
+            foreach (Fleur fleur in this.bouquet)
             {
                 fleur.Afficher();
             }
@@ -74,7 +77,7 @@ namespace GestionMagasinFleurs
         {
             float prixTotal = 0;
 
-            foreach (Fleur fleur in this.bouquet)
+            foreach (Fleur fleur in bouquet)
             {
                 prixTotal += fleur.PrixUnitaire;
             }

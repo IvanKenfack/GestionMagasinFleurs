@@ -129,7 +129,7 @@ while (arreter == 'o')
                         articles.Add(c1.SelectionnerFleur(boutique.stockFleur));
                         Commande commande = new Commande(1,c1,(Vendeur)u3);
                         commande.AjouterArticle(articles[0]);
-                        c1.PasserCommande(commande);
+                        c1.PasserCommandeFleur(commande);
                         Console.WriteLine();
                         break;
 
@@ -165,22 +165,26 @@ while (arreter == 'o')
 
                         Console.WriteLine("Voulez-vous stocker ce bouquet comme modèle ? (o/n)");
                         char choixEnregistrer = char.ToLower(Console.ReadKey().KeyChar);
+                        Console.WriteLine();
                         if (choixEnregistrer == 'o')
                         {
                             Console.WriteLine("Veuillez entrer un nom pour le bouquet\n");
                             string nomBouquet = Console.ReadLine();
+                            Console.WriteLine();
                             var m1 = bouquet.ConvertirEnModele(nomBouquet);
                             m1.StockerModele();
                         }
                         Article articleBouquet = bouquet.ConvertirEnArticle(1, 1);
                         var commande_ = new Commande(2, c1, (Vendeur)u3);
                         commande_.AjouterArticle(articleBouquet);
-                        c1.PasserCommande(commande_);
+                        c1.PasserCommandeBouquet(commande_);
                         break;
 
                 case 4:
                         List<ModeleBouquet> modelesDispo = ModeleBouquet.ChargerTousModeles();
                         int i = 0;
+                        Console.WriteLine();
+                        Console.WriteLine();
                         foreach(ModeleBouquet modele in modelesDispo)
                         {
                             Console.Write($"{i + 1}");
@@ -208,7 +212,7 @@ while (arreter == 'o')
                         }
                         var cmd = new Commande(2, c1, (Vendeur)u3);
                         cmd.AjouterArticle(choixBouquet[0]);
-                        c1.PasserCommande(cmd);
+                        c1.PasserCommandeBouquet(cmd);
 
                         break;
 
@@ -244,7 +248,10 @@ while (arreter == 'o')
                 switch (choix)
                 {
                     case "1":
-                        Console.WriteLine("Commandes en cour");
+                        Console.WriteLine();
+                        Console.WriteLine("**************************************************************");
+                        Console.WriteLine("******************   Commandes en cour    ********************");
+                        Console.WriteLine("**************************************************************");
                         Console.WriteLine();
                         List<Commande> commandesEnCours = Commande.ImporterToutesLesCommandes();
                         

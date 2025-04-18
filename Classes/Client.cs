@@ -56,12 +56,12 @@ namespace GestionMagasinFleurs
             Console.WriteLine($"{Nom} a sélectionné le bouquet : {bouquet}");
         }
 
-        public void PasserCommande(Commande commande)
+        public void PasserCommandeFleur(Commande commande)
         {
             try
             {
                 List<Commande> tousLesCommandes = new List<Commande>();
-                string cheminFichier = Path.GetFullPath("Commandes.json");
+                string cheminFichier = Path.GetFullPath("CommandesFleurs.json");
 
                 // Lire les commandes existantes si le fichier existe  
                 if (File.Exists(cheminFichier))
@@ -73,17 +73,16 @@ namespace GestionMagasinFleurs
 
                 // Ajouter la commande actuel  
                 tousLesCommandes.Add(commande);
-                string fichierJSON = "Commandes.json";
                 var settings = new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                     Formatting = Formatting.Indented,
                     TypeNameHandling = TypeNameHandling.Auto,
-                    Converters = new List<JsonConverter> { new ConvertisseurProduit(), new StringEnumConverter() }
+                    //Converters = new List<JsonConverter> { new ConvertisseurProduit(), new StringEnumConverter() }
                 };
 
-                string json = JsonConvert.SerializeObject(commande, settings);
-                File.WriteAllText(fichierJSON, json);
+                string json = JsonConvert.SerializeObject(tousLesCommandes, settings);
+                File.WriteAllText(cheminFichier, json);
                 Console.WriteLine("Commande passée avec succès !");
                 Console.WriteLine();
             }
@@ -93,6 +92,44 @@ namespace GestionMagasinFleurs
                 Console.WriteLine($"Erreur lors du passage de la commande : \n\n\n{ex.Message}");
             }
         }
+
+        public void PasserCommandeBouquet(Commande commande)
+        {
+            try
+            {
+                List<Commande> tousLesCommandes = new List<Commande>();
+                string cheminFichier = Path.GetFullPath("CommandesBouquets.json");
+
+                // Lire les commandes existantes si le fichier existe  
+                if (File.Exists(cheminFichier))
+                {
+                    string contenuFichier = File.ReadAllText(cheminFichier);
+                    tousLesCommandes = JsonConvert.DeserializeObject<List<Commande>>(contenuFichier)
+                                    ?? new List<Commande>();
+                }
+
+                // Ajouter la commande actuel  
+                tousLesCommandes.Add(commande);
+                var settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented,
+                    TypeNameHandling = TypeNameHandling.Auto,
+                };
+
+                string json = JsonConvert.SerializeObject(tousLesCommandes, settings);
+                File.WriteAllText(cheminFichier, json);
+                Console.WriteLine("Commande passée avec succès !");
+                Console.WriteLine();
+            }
+
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Erreur lors du passage de la commande : \n\n\n{ex.Message}");
+            }
+        }
+
+
 
         public TypePaiement ChoisirMoyenPaiement()
         {

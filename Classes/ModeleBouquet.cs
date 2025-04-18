@@ -9,11 +9,13 @@ namespace GestionMagasinFleurs.Classes
 {
     internal class ModeleBouquet
     {
-        [JsonProperty("fleurs")]
-        public List<Fleur> Fleurs { get; set; } = new List<Fleur>();
+        [JsonIgnore]
+        public List<Fleur> Fleurs { get; set; }
 
-        [JsonProperty("carte")]
-        public CartePersonalisée Carte { get; set; }
+        [JsonIgnore]
+        public CartePersonalisée Carte {  get; set; }
+        [JsonProperty("Bouquet")]
+        public Bouquet Bouquet { get; set; }
 
         [JsonProperty("prixTotal")]
         public float PrixTotal { get; set; }
@@ -23,14 +25,12 @@ namespace GestionMagasinFleurs.Classes
 
         [JsonProperty("dateCreation")]
         public DateTime DateCreation { get; set; } = DateTime.Now;
-        //private static string cheminFichier = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\modèlesBouquets.json";
-        private static string cheminFichier = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\GestionMagasinFleurs\\modèlesBouquets.json";
+        private static string cheminFichier = Path.GetFullPath("modèlesBouquets.json");
         public ModeleBouquet() { }
 
         public ModeleBouquet(Bouquet bouquet, string nomModele)
         {
-            this.Fleurs = new List<Fleur>(bouquet.GetFleurs());
-            this.Carte = bouquet.GetCarte();
+            this.Bouquet = bouquet;
             this.PrixTotal = bouquet.PrixUnitaire;
             this.NomModele = nomModele;
         }
@@ -101,7 +101,7 @@ namespace GestionMagasinFleurs.Classes
             Console.WriteLine($"\nModèle : {this.NomModele}");
             Console.WriteLine($"Prix : {this.PrixTotal} CAD");
             Console.WriteLine("Fleurs incluses :");
-            foreach (var fleur in this.Fleurs)
+            foreach (var fleur in this.Bouquet.bouquet)
             {
                 Console.WriteLine($"- {fleur.Nom}");
             }

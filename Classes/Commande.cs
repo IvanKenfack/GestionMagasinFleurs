@@ -62,9 +62,16 @@ namespace GestionMagasinFleurs
         {
             Console.WriteLine();
             Console.WriteLine("ID: " + this.ID);
+            Console.WriteLine();
+            foreach (Article article in this.Articles)
+            {
+                article.AfficherArticlePourCommande();
+            }    
             Console.WriteLine("Etat: " + this.Etat.ToString());
             Console.WriteLine("Client: " + Client.Nom);
             Console.WriteLine("Vendeur: " + Vendeur.Nom);
+            Console.WriteLine("Montant Total: " + this.Montant);
+            Console.WriteLine("Mode de paiement: " + this.ModePaiement.ToString());
             Console.WriteLine();
         }
 
@@ -88,8 +95,7 @@ namespace GestionMagasinFleurs
             Console.WriteLine($"ID: {ID}");
             Console.WriteLine($"Etat: {Etat}");
             Console.WriteLine($"Client: {Client.Nom}");
-            //Console.WriteLine($"Date de commande: {DateCommande}");
-            Console.WriteLine($"Vendeur: {Vendeur.Nom}");
+            Console.WriteLine($"Vendeur: {Vendeur.Nom}(Vous)");
             Console.WriteLine($"Montant total: {Montant}");
             Console.WriteLine("--------------------------------------------------");
             foreach (Article article in Articles)
@@ -105,23 +111,55 @@ namespace GestionMagasinFleurs
                 TypeNameHandling = TypeNameHandling.Auto,  //Pour serialiser correctement l'interface IProduit
                 Converters = new List<JsonConverter>
                 {
-                    new ConvertisseurProduit(),
+                    //Pour la conversion des Enumerations
                     new StringEnumConverter()
                 }
             };
+            //Fichier commandes des fleurs
+            string cheminFichierCommandesFleurs = Path.GetFullPath("CommandesFleurs.json");
 
-            string cheminFichier = Path.GetFullPath("Commandes.json");
+            //Fichier commandes des Bouquets
+            string cheminFichierCommandesBouquet = Path.GetFullPath("CommandesBouquets.json");
 
             List<Commande> commandes = new List<Commande>();
 
+
             try
             {
-                if (File.Exists(cheminFichier))
+                // Lecture commandes fleurs
+                string cheminFleurs = Path.GetFullPath("CommandesFleurs.json");
+
+                if (File.Exists(cheminFleurs))
                 {
-                    var contenu = File.ReadAllText(cheminFichier);
-                    commandes = JsonConvert.DeserializeObject<List<Commande>>(contenu) ?? new List<Commande>();
+                    string jsonFleurs = File.ReadAllText(cheminFleurs);
+                    var cmdFleurs = JsonConvert.DeserializeObject<List<Commande>>(jsonFleurs) ?? new List<Commande>();
+
+                    if (cmdFleurs != null) 
+                    { 
+                        foreach(Commande c in cmdFleurs)
+                        {
+                            commandes.Add(c);
+                        }   
+                    }
+                }
+
+                // Lecture commande bouquet
+                string cheminBouquet = Path.GetFullPath("CommandesBouquets.json");
+
+                if (File.Exists(cheminBouquet))
+                {
+                    string jsonBouquet = File.ReadAllText(cheminBouquet);
+                    var cmdBouquet = JsonConvert.DeserializeObject<List<Commande>>(jsonBouquet) ?? new List<Commande>();
+                    if (cmdBouquet != null)
+                    {
+                        foreach (Commande c in cmdBouquet)
+                        {
+                            commandes.Add(c);
+                        }
+                    }
                 }
             }
+
             catch (JsonException ex)
             {
                 Console.WriteLine($"Erreur lors de la lecture du fichier : \n{ex.Message}");

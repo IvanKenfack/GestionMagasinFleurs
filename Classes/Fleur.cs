@@ -13,7 +13,8 @@ namespace GestionMagasinFleurs
 {
     internal class Fleur : IProduit
     {
-        /// Attributs de la classe Fleur pour le mappage CSV
+        /// Attributs de la classe Fleur pour le mappage  et JSON
+        
         [Name("Nom")]
         public string Nom{ get; set;}
 

@@ -45,12 +45,25 @@ namespace GestionMagasinFleurs.Classes
         {
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine($"ID: {ID}");
-            Produit.Afficher();
-            Console.WriteLine($"Quantité: {Quantite}\n, Sous-total: {sousTotal}\n");
-            Console.WriteLine("--------------------------------------------------");
+            string nomArticle = this.Produit.ToString();
+            string[] nomArticle_ = nomArticle.Split(".");
+            Console.WriteLine();
+            Console.WriteLine("Type d'article: "+nomArticle_.Last()); //Affiche le type de l'article: Fleur ou Bouquet
+            Console.WriteLine($"Quantité: {Quantite}\nSous-total: {sousTotal}\n");
+            Console.WriteLine("--------------------------");
             Console.WriteLine();
             Console.WriteLine($"Sous total : {sousTotal} CAD");
+        }
+
+        public void AfficherArticlePourCommande()
+        {
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------");
+            string nomArticle = this.Produit.ToString();
+            string[] nomArticle_ = nomArticle.Split(".");
+            Console.WriteLine();
+            Console.WriteLine("Type d'article: " + nomArticle_.Last()); //Affiche le type de l'article: Fleur ou Bouquet
+            Console.WriteLine($"Quantité: {Quantite}");
         }
     }
 }
