@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    internal abstract class Produit
+    public interface IProduit
     {
-        public abstract void Afficher(); 
+        float PrixUnitaire { get; }
+        void Afficher();
+        Article ConvertirEnArticle(int id, int quantite);
     }
 }

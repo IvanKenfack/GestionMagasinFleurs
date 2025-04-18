@@ -25,7 +25,6 @@ namespace GestionMagasinFleurs.Classes
         }
         public void AfficherStock()
         {
-            Console.WriteLine("*********  Le stock de fleurs  *********");
             Console.WriteLine();
             int i = 0;
             foreach (var fleur in stockFleur)

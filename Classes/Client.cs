@@ -57,8 +57,6 @@ namespace GestionMagasinFleurs
 
         public void PasserCommande(Commande commande)
         {
-            List<Commande> historiqueCommandes = new List<Commande>();
-            historiqueCommandes.Add(commande);
             string fichierJSON = "Commandes.json";
             var settings = new JsonSerializerSettings
             {
@@ -73,6 +71,7 @@ namespace GestionMagasinFleurs
             string json = JsonConvert.SerializeObject(commande, Formatting.Indented);
             File.WriteAllText(fichierJSON, json);
             Console.WriteLine("Commande passée avec succès !");
+            Console.WriteLine();
         }
 
         public TypePaiement ChoisirMoyenPaiement()
@@ -99,10 +98,10 @@ namespace GestionMagasinFleurs
 
         public int IndiquerPreferences()
         {
-            Console.WriteLine("1. Commander une seul fleur\n");
-            Console.WriteLine("2. Constituer et commander un bouquet\n");
-            Console.WriteLine("3. Commander un bouquet\n");
-            Console.WriteLine("4. Consulter mes commandes\n");
+            Console.WriteLine("1. Afficher le catalogue des Fleurs\n");
+            Console.WriteLine("2. Commander une seul fleur\n");
+            Console.WriteLine("3. Constituer et commander un bouquet\n");
+            Console.WriteLine("4. Commander un bouquet parmis ceux disponibles\n");
             Console.WriteLine("5. Quitter\n");
             int choix = int.Parse(Console.ReadLine());
             return choix;

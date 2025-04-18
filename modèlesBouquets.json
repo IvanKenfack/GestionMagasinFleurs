@@ -1,0 +1,131 @@
+[
+  {
+    "fleurs": [
+      {
+        "Nom": "Rose",
+        "PrixUnitaire": 3.4,
+        "Couleur": "Rouge",
+        "Caractéristiques": "Parfumée et symbolise l'amour",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Lys",
+        "PrixUnitaire": 4.1,
+        "Couleur": "Blanc",
+        "Caractéristiques": "Parfum envoûtant",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Gerbera",
+        "PrixUnitaire": 2.7,
+        "Couleur": "Orange",
+        "Caractéristiques": "Grande fleur colorée",
+        "Quantité": 0,
+        "Fleurs": []
+      }
+    ],
+    "carte": {
+      "Nom": "test",
+      "Message": "test"
+    },
+    "prixTotal": 13.2,
+    "nomModele": "b1",
+    "dateCreation": "2025-04-17T15:54:57.0135782-04:00"
+  },
+  {
+    "fleurs": [
+      {
+        "Nom": "Hibiscus",
+        "PrixUnitaire": 3.5,
+        "Couleur": "Rouge",
+        "Caractéristiques": "Tropicale et décorative",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Pavot",
+        "PrixUnitaire": 2.8,
+        "Couleur": "Rouge",
+        "Caractéristiques": "Délicate et éphémère",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Capucine",
+        "PrixUnitaire": 1.9,
+        "Couleur": "Orange",
+        "Caractéristiques": "Comestible et décorative",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Bégonia",
+        "PrixUnitaire": 3.9,
+        "Couleur": "Rose",
+        "Caractéristiques": "Fleur en pot ou en massif",
+        "Quantité": 0,
+        "Fleurs": []
+      }
+    ],
+    "carte": {
+      "Nom": "test2",
+      "Message": "test2"
+    },
+    "prixTotal": 15.1,
+    "nomModele": "b2",
+    "dateCreation": "2025-04-17T15:58:08.4174089-04:00"
+  },
+  {
+    "fleurs": [
+      {
+        "Nom": "Rose",
+        "PrixUnitaire": 3.4,
+        "Couleur": "Rouge",
+        "Caractéristiques": "Parfumée et symbolise l'amour",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Lys",
+        "PrixUnitaire": 4.1,
+        "Couleur": "Blanc",
+        "Caractéristiques": "Parfum envoûtant",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Gerbera",
+        "PrixUnitaire": 2.7,
+        "Couleur": "Orange",
+        "Caractéristiques": "Grande fleur colorée",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Marguerite",
+        "PrixUnitaire": 1.6,
+        "Couleur": "Blanc",
+        "Caractéristiques": "Symbole de l’innocence",
+        "Quantité": 0,
+        "Fleurs": []
+      },
+      {
+        "Nom": "Chrysanthème",
+        "PrixUnitaire": 3.1,
+        "Couleur": "Jaune",
+        "Caractéristiques": "Résistante et automnale",
+        "Quantité": 0,
+        "Fleurs": []
+      }
+    ],
+    "carte": {
+      "Nom": "test3",
+      "Message": "test3"
+    },
+    "prixTotal": 17.9,
+    "nomModele": "b3",
+    "dateCreation": "2025-04-17T16:10:58.8004886-04:00"
+  }
+]

@@ -32,7 +32,7 @@ namespace GestionMagasinFleurs
             this.Client = client;
             this.Vendeur = vendeur;
             this.articles = new List<Article>();
-            this.Montant = this.CalculerMontant();
+            this.Montant = 0;
             this.ModePaiement = client.ChoisirMoyenPaiement();
         }
 
@@ -61,25 +61,13 @@ namespace GestionMagasinFleurs
         public void AjouterArticle(Article article)
         {
             articles.Add(article);
+            Montant = CalculerMontant();
+
         }
 
         public float CalculerMontant()
         {
-            float montant = 0;
-            foreach (Article article in articles)
-            {
-                if (article.Produit is Fleur)
-                {
-                    Fleur fleur = (Fleur)article.Produit;
-                    montant += fleur.PrixUnitaire * fleur.Quantité;
-                }
-                else if (article.Produit is Bouquet)
-                {
-                    Bouquet bouquet = (Bouquet)article.Produit;
-                    montant += bouquet.PrixTotal;
-                }
-            }
-            return montant;
+           return articles.Sum(article => article.CalculerSousTotal());
         }
 
         public void GenererFacture()

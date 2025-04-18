@@ -11,7 +11,7 @@ using GestionMagasinFleurs.Classes;
 
 namespace GestionMagasinFleurs
 {
-    internal class Fleur : Produit
+    internal class Fleur : IProduit
     {
         /// Attributs de la classe Fleur pour le mappage CSV
         [Name("Nom")]
@@ -50,7 +50,7 @@ namespace GestionMagasinFleurs
         {
 
             // Je recupère le chemin absolu du fichier CSV
-            string fichierCSV = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\fleurs_db.csv";
+            string fichierCSV = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\GestionMagasinFleurs\\fleurs_db.csv";
 
             using (var lecture = new StreamReader(fichierCSV))
             using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
@@ -67,12 +67,17 @@ namespace GestionMagasinFleurs
             }
         }
 
-        public override void Afficher()
+        public void Afficher()
         {   
             Console.WriteLine();
             Console.WriteLine($"Nom : {this.Nom}\nCouleur : {this.Couleur}\nCaratéristiques : {this.Caractéristiques}\nPrix Unitaire : {this.PrixUnitaire} CAD");
             Console.WriteLine();
         }
-          
+
+        public Article ConvertirEnArticle(int id, int quantite)
+        {
+            return new Article(id, this, quantite);
+        }
+
     }
 }

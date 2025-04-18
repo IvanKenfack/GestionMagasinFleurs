@@ -5,47 +5,69 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using GestionMagasinFleurs.Classes;
+using System.Reflection;
 
 namespace GestionMagasinFleurs
 {
-    internal class Bouquet : Produit
+    internal class Bouquet : IProduit
     {
-        private List<Fleur> bouquet;
-        private CartePersonalisée carte; //{ get; set; }
-        //private List<Bouquet> modeles = new List<Bouquet>();
+        public List<Fleur> bouquet;
+        public CartePersonalisée carte; 
 
-        public int PrixTotal {  get; set; }
-
-        public Bouquet(List<Fleur> choixFleurs,string nom, string message)
-        {
-            choixFleurs = new List<Fleur>();
-            this.bouquet = new List<Fleur>();
-            carte = new CartePersonalisée(nom,message);
-            foreach (Fleur fleur in choixFleurs)
+        public float PrixUnitaire { 
+            get
             {
-                this.bouquet.Add(fleur);
+                return CalculerPrixTotal();
             }
+        }
+
+        public Bouquet()
+        {
 
         }
 
-        //public void EnregistrerModel(Bouquet bouquet)
-        //{
-        //    modeles.Add(bouquet);
-        //}
+        public Bouquet(List<Fleur> choixFleurs,string nom, string message)
+        {
+            this.bouquet = new List<Fleur>(choixFleurs);
+            carte = new CartePersonalisée(nom,message);
 
+        }
+
+        public List<Fleur> GetFleurs()
+        {
+            return new List<Fleur>(this.bouquet);
+        }
+        public CartePersonalisée GetCarte() 
+        { 
+            return this.carte;
+        }
+
+        public ModeleBouquet ConvertirEnModele(string nom)
+        {
+            return new ModeleBouquet(this, nom);
+        }
+
+        public Article ConvertirEnArticle(int id, int quantite)
+        {
+            return new Article(id,this, quantite);
+        }
         public void AjouterFleur(Fleur fleur)
         {
             bouquet.Add(fleur);
         }  
             
-        public override void Afficher()
+        public void Afficher()
         {
+            Console.WriteLine();
             Console.WriteLine("-----------------BOUQUET--------------------------");
             carte.AfficherCarte();
             foreach (Fleur fleur in bouquet)
             {
                 fleur.Afficher();
-            }   
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Prix Total du Bouquet: {this.PrixUnitaire} CAD");
+            Console.WriteLine();
         }
 
         public float CalculerPrixTotal()
@@ -58,33 +80,11 @@ namespace GestionMagasinFleurs
             }
 
             prixTotal += 3;
-            return PrixTotal;
+            return prixTotal;
         }
 
-        //public void AfficherModeles()
-        //{
-        //    int i = 0;
-        //    foreach (Bouquet bouquet in modeles)
-        //    {
-        //       Console.WriteLine($"Modèle {i + 1}");
-        //       bouquet.Afficher();
-        //        i++;
-        //    }
-        //}
-
-        public void StockerModeles(Bouquet modele)
-        {
-           string fichierJSON = "modeles_Bouquets.json";
-           string modelesBouquets = File.ReadAllText(fichierJSON);
-
-           List<Bouquet> modelesBouquetsList = JsonConvert.DeserializeObject<List<Bouquet>>(modelesBouquets);
-
-            modelesBouquetsList.Add(modele);
-
-             //modelesBouquetsList.Add(bouquet);
-            string json = JsonConvert.SerializeObject(modelesBouquetsList, Formatting.Indented);
-            File.WriteAllText(fichierJSON, json);   
-        }
 
     }
+
 }
+

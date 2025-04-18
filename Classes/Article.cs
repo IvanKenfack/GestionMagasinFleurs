@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace GestionMagasinFleurs.Classes
 {
-    internal class Article
+    public class Article
     {
         public int ID { get; set; }
-        public Produit Produit { get; set; }
+        public IProduit Produit { get; set; }
         public int Quantite { get; set; }
-        public double sousTotal { get; set; }
+        public float sousTotal { get; set; }
 
 
-        public Article(int id, Produit produit, int quantite) 
+        public Article(int id, IProduit produit, int quantite) 
         {
             this.ID = id;
             this.Produit = produit;
@@ -22,23 +22,9 @@ namespace GestionMagasinFleurs.Classes
             this.sousTotal = CalculerSousTotal();
         }
 
-        public Article()
+        public float CalculerSousTotal()
         {
-        }
-
-        public double CalculerSousTotal()
-        {
-            if (this.Produit is Fleur)
-                {
-                Fleur fleur = (Fleur)this.Produit;
-                return fleur.PrixUnitaire * this.Quantite;
-                }
-            else
-            {
-                Bouquet bouquet = (Bouquet)this.Produit;
-                float prixUnitaire = bouquet.CalculerPrixTotal();
-                return prixUnitaire * this.Quantite;
-            }
+            return Produit.PrixUnitaire * Quantite;
             
         }
 
@@ -51,6 +37,7 @@ namespace GestionMagasinFleurs.Classes
             Console.WriteLine($"Quantité: {Quantite}\n, Sous-total: {sousTotal}\n");
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine();
+            Console.WriteLine($"Sous total : {sousTotal} CAD");
         }
     }
 }

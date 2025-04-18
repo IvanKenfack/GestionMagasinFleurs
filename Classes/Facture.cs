@@ -17,7 +17,7 @@ namespace GestionMagasinFleurs
 
         public DateTime DateFacture { get; set; }
 
-        Produit produit { get; set; }
+        IProduit produit { get; set; }
 
         
 

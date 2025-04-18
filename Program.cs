@@ -109,10 +109,6 @@ while (arreter == 'o')
         while (continuer == 'o')
             {
                 Console.WriteLine();
-                AffichageCentrale("***** FLEURS DISPONIBLES *****");
-                Console.WriteLine();
-                boutique.AfficherStock();
-                Console.WriteLine();
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine();
                 Client c1 = (Client)utilisateurConnecté;
@@ -122,15 +118,23 @@ while (arreter == 'o')
                 switch(preference)
                 {
                     case 1:
-                        //Console.Clear();
-                        //c1.articles.Add(c1.SelectionnerFleur(boutique.stockFleur));
-                        //Commande commande = new Commande(1,c1,(Vendeur)u3);
-                        //commande.AjouterArticle(c1.articles[0]);
-                        //c1.PasserCommande(commande);
-                        //Console.WriteLine();
-                        break;
+                    Console.WriteLine();
+                    AffichageCentrale("***** FLEURS DISPONIBLES *****");
+                    boutique.AfficherStock();
+                    break;
 
                     case 2:
+                         List<Article> articles = new List<Article>();
+                        Console.Clear();
+                        articles.Add(c1.SelectionnerFleur(boutique.stockFleur));
+                        Commande commande = new Commande(1,c1,(Vendeur)u3);
+                        commande.AjouterArticle(articles[0]);
+                        c1.PasserCommande(commande);
+                        Console.WriteLine();
+                        break;
+
+                    case 3:
+                        
                         Console.Clear();
                         boutique.AfficherStock();
                         Console.WriteLine();    
@@ -139,12 +143,13 @@ while (arreter == 'o')
                         List<Fleur> choixFleurs = new List<Fleur>();
 
                         string choix = Console.ReadLine();
+
                         while ( choix != "f")
                         {
                             int choixFleur = int.Parse(choix);
                             choixFleurs.Add(boutique.stockFleur[choixFleur - 1]);
                             boutique.stockFleur.RemoveAt(choixFleur - 1);
-                            Console.WriteLine("Entrez le numero de la fleur suivante :");
+                            Console.WriteLine("Entrez le numero de la fleur suivante ou f pour terminer la selection:");
                             choix = Console.ReadLine();
                         }
 
@@ -155,85 +160,62 @@ while (arreter == 'o')
                         Bouquet bouquet = new Bouquet(choixFleurs, nom, messageCarte);
                         Console.WriteLine();
 
-                    List<Article> ArticlePourCommade = new List<Article>();
-
-                    Article articleUtilisateur = new Article()
-                    {
-                        ID = 9898,
-                        Produit = bouquet, // Corrected this line
-                        Quantite = 1,
-                        sousTotal = bouquet.CalculerPrixTotal()
-                    };
-
-                    ArticlePourCommade.Add(articleUtilisateur);
-
-                    Commande commandeDeUtilisateur = new Commande()
-                    {
-                        ID = 9898,
-                        Client = (Client)u2,
-                        Vendeur = (Vendeur)u3,
-                        articles = ArticlePourCommade,
-                        Montant = 978787,
-                        ModePaiement = TypePaiement.carteDebit
-                    };
-
-                    string fichierJSON = "Commandes.json";
-                    string modelesBouquets = File.ReadAllText(fichierJSON);
-
-                    JsonConvert.DeserializeObject<List<Commande>>(modelesBouquetsList, new ProduitConverter());
-
-                    modelesBouquetsList.Add(commandeDeUtilisateur);
-
-                    //modelesBouquetsList.Add(bouquet);
-                    string json = JsonConvert.SerializeObject(modelesBouquetsList, Formatting.Indented);
-                    File.WriteAllText(fichierJSON, json);
-
-
-
-
-                    Console.WriteLine("Voici votre bouquet :");
+                        Console.WriteLine("Voici votre bouquet :");
                         bouquet.Afficher();
-                        Console.WriteLine();
-                        Console.WriteLine("***************************************************");
-                        Console.WriteLine();
 
-                        Console.WriteLine("Prix total : " + bouquet.CalculerPrixTotal() + "CAD");
-                        Console.WriteLine();
-
-                        Console.WriteLine("Voulez-vous enregistrer ce bouquet comme modèle ? (o/n)");
+                        Console.WriteLine("Voulez-vous stocker ce bouquet comme modèle ? (o/n)");
                         char choixEnregistrer = char.ToLower(Console.ReadKey().KeyChar);
                         if (choixEnregistrer == 'o')
                         {
-                            bouquet.StockerModeles(bouquet);
-                            Console.WriteLine("Modèle enregistré avec succès !");
+                            Console.WriteLine("Veuillez entrer un nom pour le bouquet\n");
+                            string nomBouquet = Console.ReadLine();
+                            var m1 = bouquet.ConvertirEnModele(nomBouquet);
+                            m1.StockerModele();
                         }
-                        else
-                        {
-                            Console.WriteLine("Modèle non enregistré.");
-                        }
-
-                        //Article article = new Article(1, bouquet, 1);
-                        //c1.articles.Add(article);
-                        //Commande com1 = new Commande(1, c1, (Vendeur)u3);
-                        //com1.AjouterArticle(c1.articles[0]);
-                        //c1.PasserCommande(com1);
-                        //Console.WriteLine();
-
-                    break;
-                        
-
-                    case 3:
-                      //  c1.articles.Add(c1.AcheterBouquet(boutique.stockFleur));
+                        Article articleBouquet = bouquet.ConvertirEnArticle(1, 1);
+                        var commande_ = new Commande(2, c1, (Vendeur)u3);
+                        commande_.AjouterArticle(articleBouquet);
+                        c1.PasserCommande(commande_);
                         break;
 
-                    case 4:
-                        Console.WriteLine("Voici vos commandes :");
-                       // c1.AfficherMesCommandes();
+                case 4:
+                        List<ModeleBouquet> modelesDispo = ModeleBouquet.ChargerTousModeles();
+                        int i = 0;
+                        foreach(ModeleBouquet modele in modelesDispo)
+                        {
+                            Console.Write($"{i + 1}");
+                            modele.Afficher();
+                            i++;
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Veuillez entrez les numeros de bouquets correspondant a votre choix\n");
+                        Console.WriteLine("Entrez f pour terminer la selection\n");
+                        List<Article> choixBouquet = new List<Article>();
+
+                        string choix_ = Console.ReadLine();
+
+                        while (choix_ != "f")
+                        {
+                            int c = int.Parse(choix_);
+                            Console.WriteLine("Quel quantite voulez-vous?");
+                            int quantite = int.Parse(Console.ReadLine());
+                            choixBouquet.Add(modelesDispo[c - 1].ConvertirEnBouquet().ConvertirEnArticle(1,quantite));
+                            modelesDispo.RemoveAt(c - 1);
+                            Console.WriteLine("Entrez le numero du bouquet suivant ou f pour terminer la selection:");
+                            choix_ = Console.ReadLine();
+                            
+                            
+                        }
+                        var cmd = new Commande(2, c1, (Vendeur)u3);
+                        cmd.AjouterArticle(choixBouquet[0]);
+                        c1.PasserCommande(cmd);
+
                         break;
 
                     case 5:
                         continuer = 'n';
                         break;
+
                     default:
                         Console.WriteLine("Choix invalide.");
                         break;
@@ -244,9 +226,43 @@ while (arreter == 'o')
         }
         else if (utilisateurConnecté is Vendeur)
         {
-            Console.WriteLine("Bienvenue Vendeur !");
-            // Ajoutez ici les fonctionnalités spécifiques au vendeur
-        }
+            char continuer = 'o';
+            Console.Clear();
+            AffichageCentrale("***** BIENVENUE VENDEUR  *****");
+            while (continuer == 'o')
+            {
+                Console.WriteLine();
+                Console.WriteLine("Que voulez-vous faire ?");
+                Console.WriteLine();
+                Console.WriteLine("1. Suivre Commande");
+                Console.WriteLine("3. Quitter");
+
+                // Demander le choix de l'utilisateur
+                Console.WriteLine("Votre choix : ");
+                string choix = Console.ReadLine();
+
+                switch (choix)
+                {
+                    case "1":
+                        Console.WriteLine();
+                        boutique.AfficherStock();
+                        break;
+
+                    case "2":
+                        // Gérer la boutique
+                        Console.WriteLine("Gestion de la boutique...");
+
+                        break;
+                    case "3":
+                        continuer = 'n';
+                        break;
+                    default:
+                        Console.WriteLine("Choix invalide. Veuillez réessayer.");
+                        break;
+                }
+            }
+
+    }
         else
         {
             Console.WriteLine("Bienvenue Fournisseur !");
