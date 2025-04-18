@@ -235,17 +235,25 @@ while (arreter == 'o')
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine();
                 Console.WriteLine("1. Suivre Commande");
-                Console.WriteLine("3. Quitter");
+                Console.WriteLine("3. Quitter\n\n");
 
                 // Demander le choix de l'utilisateur
-                Console.WriteLine("Votre choix : ");
+                Console.WriteLine("Votre choix : \n");
                 string choix = Console.ReadLine();
 
                 switch (choix)
                 {
                     case "1":
+                        Console.WriteLine("Commandes en cour");
                         Console.WriteLine();
-                        boutique.AfficherStock();
+                        List<Commande> commandesEnCours = Commande.ImporterToutesLesCommandes();
+                        
+                        foreach(Commande c in commandesEnCours)
+                        {
+                            c.AfficherCommande();
+                        }
+                        Console.WriteLine();
+                        
                         break;
 
                     case "2":

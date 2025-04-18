@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,23 @@ namespace GestionMagasinFleurs.Classes
 {
     public class Article
     {
+        [JsonProperty("ID")]
         public int ID { get; set; }
+
+        [JsonProperty("Produit")]
+        [JsonConverter(typeof(ConvertisseurProduit))]
         public IProduit Produit { get; set; }
+
+        [JsonProperty("Quantite")]
         public int Quantite { get; set; }
+
+        [JsonProperty("sousTotal")]
         public float sousTotal { get; set; }
 
+        public Article()
+        {
+
+        }
 
         public Article(int id, IProduit produit, int quantite) 
         {

@@ -1,5 +1,6 @@
 ﻿using GestionMagasinFleurs.Classes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,21 +58,40 @@ namespace GestionMagasinFleurs
 
         public void PasserCommande(Commande commande)
         {
-            string fichierJSON = "Commandes.json";
-            var settings = new JsonSerializerSettings
+            try
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
+                List<Commande> tousLesCommandes = new List<Commande>();
+                string cheminFichier = Path.GetFullPath("Commandes.json");
 
-            //string commandes = File.ReadAllText(fichierJSON);
+                // Lire les commandes existantes si le fichier existe  
+                if (File.Exists(cheminFichier))
+                {
+                    string contenuFichier = File.ReadAllText(cheminFichier);
+                    tousLesCommandes = JsonConvert.DeserializeObject<List<Commande>>(contenuFichier)
+                                    ?? new List<Commande>();
+                }
 
-            //List<Commande> commandesClient = JsonConvert.DeserializeObject<List<Commande>>(commande);
+                // Ajouter la commande actuel  
+                tousLesCommandes.Add(commande);
+                string fichierJSON = "Commandes.json";
+                var settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented,
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    Converters = new List<JsonConverter> { new ConvertisseurProduit(), new StringEnumConverter() }
+                };
 
-            //commandesClient.Add(commandes);
-            string json = JsonConvert.SerializeObject(commande, Formatting.Indented);
-            File.WriteAllText(fichierJSON, json);
-            Console.WriteLine("Commande passée avec succès !");
-            Console.WriteLine();
+                string json = JsonConvert.SerializeObject(commande, settings);
+                File.WriteAllText(fichierJSON, json);
+                Console.WriteLine("Commande passée avec succès !");
+                Console.WriteLine();
+            }
+
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Erreur lors du passage de la commande : \n\n\n{ex.Message}");
+            }
         }
 
         public TypePaiement ChoisirMoyenPaiement()
