@@ -51,11 +51,6 @@ namespace GestionMagasinFleurs
 
         }
 
-        public void SelectionnerBouquet(string bouquet)
-        {
-            Console.WriteLine($"{Nom} a sélectionné le bouquet : {bouquet}");
-        }
-
         public void PasserCommandeFleur(Commande commande)
         {
             try
