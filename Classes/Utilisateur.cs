@@ -29,7 +29,7 @@ namespace GestionMagasinFleurs
             {
                 if (utilisateur.Email == email && utilisateur.MotDepasse == motDePasse)
                 {
-                    Console.WriteLine($"Bienvenue {utilisateur.Nom} !");
+                    
                     return utilisateur;
                 }
             }
@@ -37,6 +37,8 @@ namespace GestionMagasinFleurs
             Console.WriteLine("Email ou mot de passe incorrect.");
             return null;
         }
+
+        
 
 
     }
