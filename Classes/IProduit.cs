@@ -8,7 +8,7 @@ namespace GestionMagasinFleurs.Classes
 {
     public interface IProduit
     {
-        float PrixUnitaire { get; }
+        float PrixUnitaire { get;}
         void Afficher();
         Article ConvertirEnArticle(int id, int quantite);
     }

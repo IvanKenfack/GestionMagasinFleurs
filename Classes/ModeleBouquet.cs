@@ -37,9 +37,7 @@ namespace GestionMagasinFleurs.Classes
 
         public Bouquet ConvertirEnBouquet()
         {
-            Bouquet nB = new Bouquet();
-            nB.bouquet = this.Fleurs;
-            nB.carte = this.Carte;
+            Bouquet nB = this.Bouquet;
             return nB;
         }
 
@@ -63,7 +61,7 @@ namespace GestionMagasinFleurs.Classes
                 var parametres = new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 };
 
                 File.WriteAllText(cheminFichier, JsonConvert.SerializeObject(tousLesModeles, parametres));
@@ -85,7 +83,16 @@ namespace GestionMagasinFleurs.Classes
                 if (File.Exists(cheminFichier))
                 {
                     var contenu = File.ReadAllText(cheminFichier);
-                    modeles = JsonConvert.DeserializeObject<List<ModeleBouquet>>(contenu) ?? new List<ModeleBouquet>();
+                    var modeles_ = JsonConvert.DeserializeObject<List<ModeleBouquet>>(contenu) ?? new List<ModeleBouquet>();
+                    
+                    if (modeles_ != null) 
+                    { 
+                        foreach(ModeleBouquet m in modeles_)
+                        {
+                            if (m == null) continue;
+                            modeles.Add(m);
+                        }   
+                    }
                 }
 
             }
@@ -107,7 +114,7 @@ namespace GestionMagasinFleurs.Classes
             {
                 Console.WriteLine($"- {fleur.Nom}");
             }
-            this.Carte.AfficherCarte();
+            this.Bouquet.carte.AfficherCarte();
         }
     }
 }
