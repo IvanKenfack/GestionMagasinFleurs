@@ -317,10 +317,10 @@ while (arreter == 'o')
         else
         {
             Console.WriteLine("Bienvenue Fournisseur !");
-            // Ajoutez ici les fonctionnalités spécifiques au fournisseur
+            
         }
-        // Demander à l'utilisateur s'il souhaite continuer
+        //On  demande à l'utilisateur s'il souhaite continuer
         Console.WriteLine("Voulez-vous continuer ? (o/n)");
         arreter = char.ToLower(Console.ReadKey().KeyChar);
-        //Console.ReadKey();
+        
 }

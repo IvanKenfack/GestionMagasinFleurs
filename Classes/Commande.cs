@@ -93,7 +93,7 @@ namespace GestionMagasinFleurs
                     //Pour la conversion des Enumerations
                     new StringEnumConverter()
                 }
-            };
+            }; 
             //Fichier commandes des fleurs
             string cheminFichierCommandesFleurs = Path.GetFullPath("CommandesFleurs.json");
 
