@@ -238,8 +238,8 @@ while (arreter == 'o')
                 Console.WriteLine();
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine();
-                Console.WriteLine("1. Suivre Commande");
-                Console.WriteLine("3. Quitter\n\n");
+                Console.WriteLine("1. Suivre une commande");
+                Console.WriteLine("2. Quitter\n\n");
 
                 // Demander le choix de l'utilisateur
                 Console.WriteLine("Votre choix : \n");
@@ -260,15 +260,38 @@ while (arreter == 'o')
                             c.AfficherCommande();
                         }
                         Console.WriteLine();
-                        
-                        break;
+                        Console.WriteLine("Veuiller entrer le chiffre correspondant a l'ID de la commande");
+                    Console.WriteLine();
+                    int iDcommandeAsuivre = int.Parse(Console.ReadLine());
+                    Commande commandeAsuivre = commandesEnCours[iDcommandeAsuivre-1];
+                    Console.WriteLine("Veuller entrer 'v' pour valider ou 'a' pour annuler");
+                    Console.WriteLine();
+                    char choix_ = char.ToLower(Console.ReadKey().KeyChar);
+                    if (choix_ == 'v')
+                    {
+                        commandeAsuivre.Etat = Enum.Parse<EtatCommande>("Validée");
+                        Console.WriteLine();
+                        Facture facture = new Facture();
+                        facture.PrixTotal = commandeAsuivre.Montant;
+                        TypePaiement tP = commandeAsuivre.ModePaiement;
+                        facture.ModePaiement = tP;
+                        foreach (Article a in commandeAsuivre.Articles)
+                        {
+                            facture.Articles.Add(a);
+                        }
+                        facture.ImprimerFacture();
+                    }
+
+                    else if (choix_ == 'a')
+                    {
+                        commandesEnCours.Remove(commandeAsuivre);
+                        Console.WriteLine("Commande annulée");
+                    }
+                    else 
+                        Console.WriteLine("Erreur de frappe");
+                    break;
 
                     case "2":
-                        // Gérer la boutique
-                        Console.WriteLine("Gestion de la boutique...");
-
-                        break;
-                    case "3":
                         continuer = 'n';
                         break;
                     default:

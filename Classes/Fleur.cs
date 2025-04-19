@@ -44,15 +44,14 @@ namespace GestionMagasinFleurs
         /// Constructeur par défaut necessaire pour la lecture du CSV
         public Fleur()
         {
-            this.Fleurs = new List<Fleur>();
+           this.Fleurs = new List<Fleur>();
         }
 
         public void ImporterFleurs()
         {
 
             // Je recupère le chemin absolu du fichier CSV
-            string fichierCSV = "C:\\Users\\kenfa\\Desktop\\COURS\\HIVER 2025\\P.O.O 2\\Tavail_01\\GestionMagasinFleurs\\fleurs_db.csv";
-
+            string fichierCSV = Path.GetFullPath("fleurs_db.csv");
             using (var lecture = new StreamReader(fichierCSV))
             using (var csv = new CsvReader(lecture, CultureInfo.InvariantCulture))
 

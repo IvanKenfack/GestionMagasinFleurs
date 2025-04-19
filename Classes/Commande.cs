@@ -48,15 +48,6 @@ namespace GestionMagasinFleurs
 
         [JsonConstructor]
         public Commande() { }
-        public void ValiderCommande()
-        {
-            this.Etat = EtatCommande.Validée              ;
-        }
-
-        public void AnnulerCommande()
-        {
-            this.Etat = EtatCommande.Annulée;
-        }
 
         public void AfficherCommande()
         {
@@ -87,22 +78,6 @@ namespace GestionMagasinFleurs
            return Articles.Sum(article => article.CalculerSousTotal());
         }
 
-        public void GenererFacture()
-        {
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine("Facture de la commande:");
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine($"ID: {ID}");
-            Console.WriteLine($"Etat: {Etat}");
-            Console.WriteLine($"Client: {Client.Nom}");
-            Console.WriteLine($"Vendeur: {Vendeur.Nom}(Vous)");
-            Console.WriteLine($"Montant total: {Montant}");
-            Console.WriteLine("--------------------------------------------------");
-            foreach (Article article in Articles)
-            {
-                article.AfficherArticle();
-            }
-        }
 
         public static List<Commande> ImporterToutesLesCommandes()
         {
