@@ -35,6 +35,8 @@ namespace GestionMagasinFleurs
         [JsonConverter(typeof(StringEnumConverter))]
         public TypePaiement ModePaiement { get; set; }
 
+        public DateTime Date { get; set; } = DateTime.Now;
+
         public Commande(int ID,Client client, Vendeur vendeur)
         {
             this.ID = ID;
@@ -44,6 +46,7 @@ namespace GestionMagasinFleurs
             this.Articles = new List<Article>();
             this.Montant = 0;
             this.ModePaiement = client.ChoisirMoyenPaiement();
+            DateTime d = this.Date;
         }
 
         [JsonConstructor]
@@ -63,6 +66,7 @@ namespace GestionMagasinFleurs
             Console.WriteLine("Vendeur: " + Vendeur.Nom);
             Console.WriteLine("Montant Total: " + this.Montant);
             Console.WriteLine("Mode de paiement: " + this.ModePaiement.ToString());
+            Console.WriteLine("Date de la Commande: " + this.Date);
             Console.WriteLine();
         }
 

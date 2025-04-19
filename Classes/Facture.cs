@@ -46,7 +46,7 @@ namespace GestionMagasinFleurs
 
                 File.WriteAllText(cheminFichier, JsonConvert.SerializeObject(this, parametres));
 
-                Console.WriteLine($"Facture sauvegardé avec success");
+                Console.WriteLine($"Facture generée avec succèss");
             }
 
             catch (Exception ex)
