@@ -77,7 +77,7 @@ namespace GestionMagasinFleurs
         {
             float prixTotal = 0;
 
-            foreach (Fleur fleur in bouquet)
+            foreach (Fleur fleur in this.bouquet)
             {
                 prixTotal += fleur.PrixUnitaire;
             }

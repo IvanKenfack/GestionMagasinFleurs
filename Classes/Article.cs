@@ -37,7 +37,7 @@ namespace GestionMagasinFleurs.Classes
 
         public float CalculerSousTotal()
         {
-            return Produit.PrixUnitaire * Quantite;
+            return this.Produit.PrixUnitaire * Quantite;
             
         }
 

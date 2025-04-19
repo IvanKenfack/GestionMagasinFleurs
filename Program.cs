@@ -5,7 +5,7 @@ using System.Reflection;
 
 //Instanciation des utilisateurs
 Utilisateur u1 = new Proprietaire(1, "Zitraaf", "zitraafbasics@gmail.com", 0000);
-Utilisateur u2 = new Client(1, "Ivan", "ivan@gmail.com", 1234);
+Utilisateur u2 = new Client(1, "Ivan", "i", 1);
 Utilisateur u3 = new Vendeur(1, "keni", "keni@gmail.com", 1000, 2000);
 Utilisateur u4 = new Fournisseur(1, "Junior", "junior@gmail.com", 134, "0788888888");
 
@@ -183,6 +183,15 @@ while (arreter == 'o')
                 case 4:
                         List<ModeleBouquet> modelesDispo = ModeleBouquet.ChargerTousModeles();
                         int i = 0;
+                        int a = 0;
+                        foreach (var modele in modelesDispo)
+                        {
+                            if (modele == null || modele.Bouquet == null )
+                            {
+                                Console.WriteLine("Le modele ");
+                            }
+                            a++;
+                        }
                         Console.WriteLine();
                         Console.WriteLine();
                         foreach(ModeleBouquet modele in modelesDispo)
@@ -203,7 +212,11 @@ while (arreter == 'o')
                             int c = int.Parse(choix_);
                             Console.WriteLine("Quel quantite voulez-vous?");
                             int quantite = int.Parse(Console.ReadLine());
+
+                            Bouquet b = modelesDispo[c - 1].ConvertirEnBouquet();
+
                             choixBouquet.Add(modelesDispo[c - 1].ConvertirEnBouquet().ConvertirEnArticle(1,quantite));
+
                             modelesDispo.RemoveAt(c - 1);
                             Console.WriteLine("Entrez le numero du bouquet suivant ou f pour terminer la selection:");
                             choix_ = Console.ReadLine();
