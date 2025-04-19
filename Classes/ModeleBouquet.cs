@@ -87,7 +87,9 @@ namespace GestionMagasinFleurs.Classes
                     var contenu = File.ReadAllText(cheminFichier);
                     modeles = JsonConvert.DeserializeObject<List<ModeleBouquet>>(contenu) ?? new List<ModeleBouquet>();
                 }
+
             }
+
             catch (JsonException ex)
             {
                 Console.WriteLine($"Erreur lors de la lecture du fichier : \n{ex.Message}");
